@@ -1,19 +1,20 @@
-#How Does the Fucktard Punchline Bot Work?
 
-*Step 1: Viewing a Punchline*
-Execute the command /punchline or /punchline@FucktardPunchlineBot. This will display a random "fucktard" punchline contributed by the community.
+# How Does the Fucktard Punchline Bot Work?
 
-*Step 2: Submitting a Punchline*
-Use the command /punchline_add or /punchline_add@FucktardPunchlineBot followed by your punchline. This action submits your punchline to the bot's repository on GitHub.
+**Step 1: Viewing a Punchline**
+Execute the command `/punchline` or `/punchline@FucktardPunchlineBot`. This will display a random "fucktard" punchline contributed by the community.
 
-*Step 3: Punchline Verification*
+**Step 2: Submitting a Punchline** 
+Use the command `/punchline_add` or `/punchline_add@FucktardPunchlineBot` followed by your punchline. This action submits your punchline to the bot's repository on GitHub.
+
+**Step 3: Punchline Verification** 
 After submission, the punchline is reviewed to ensure it is not spam or inappropriate content. Once verified, your punchline will be added to the Fucktard Punchline Bot's collection.
 
-*Development Note:*
-The Fucktard Punchline Bot is developed by a group of degen people who believe in $fcktard. It's a living project that evolves with contributions from its community.
+**Development Note** 
+The Fucktard Punchline Bot is developed by a group of degen people who believe in $fcktard. 
+It's a living project that evolves with contributions from its community.
 
 ```
-
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░░░░░▒░░░░░░░░░░░░░░░░░░░
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓░░░░░░▒░░░░░░░░░░░░░░░░░░
