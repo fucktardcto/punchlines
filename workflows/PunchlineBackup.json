@@ -455,7 +455,7 @@
       "credentials": {
         "n8nApi": {
           "id": "RtWorNnQpQRXug5N",
-          "name": "n8n account"
+          "name": "workflows"
         }
       }
     },
@@ -501,9 +501,15 @@
       "updatedAt": "2024-10-27T00:43:25.900Z",
       "id": "NooBX7Y6hAaWdyt6",
       "name": "punchlines"
+    },
+    {
+      "createdAt": "2024-10-27T02:40:43.383Z",
+      "updatedAt": "2024-10-27T02:40:43.383Z",
+      "id": "pBvYNieRPdFEauUr",
+      "name": "library"
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-27T02:22:20.578Z",
-  "versionId": "969d94ac-ad1e-4bfb-8a27-a3bd8e24fca9"
+  "updatedAt": "2024-10-27T02:40:53.556Z",
+  "versionId": "e752824b-bb82-4e63-969a-4f46afa93042"
 }
