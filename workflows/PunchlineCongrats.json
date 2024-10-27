@@ -1,0 +1,362 @@
+{
+  "active": true,
+  "connections": {
+    "Github Trigger": {
+      "main": [
+        [
+          {
+            "node": "branch = main",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "branch = main": {
+      "main": [
+        [
+          {
+            "node": "modified = punchlines.csv",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "modified = punchlines.csv": {
+      "main": [
+        [
+          {
+            "node": "GitHub1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GetRandomImage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub1": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetRandomImage": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-27T00:31:01.469Z",
+  "id": "rUpG4t7ZeYg5gBWS",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PunchlineCongrats",
+  "nodes": [
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "fucktardcto",
+          "mode": "list",
+          "cachedResultName": "fucktardcto",
+          "cachedResultUrl": "https://github.com/fucktardcto"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "punchlines",
+          "mode": "list",
+          "cachedResultName": "punchlines",
+          "cachedResultUrl": "https://github.com/fucktardcto/punchlines"
+        },
+        "events": [
+          "push"
+        ],
+        "options": {}
+      },
+      "id": "d3d81724-1ea8-4fd8-afe5-4ec9b44d9930",
+      "name": "Github Trigger",
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        480,
+        320
+      ],
+      "webhookId": "557763c2-8fa1-4ce0-8a83-0041632717ec",
+      "credentials": {
+        "githubApi": {
+          "id": "vfNscJhqbHph9srD",
+          "name": "user/fcktardcto"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "4c8745ec-256b-4767-a1c6-73a42162e06a",
+              "leftValue": "={{ $json.body.ref }}",
+              "rightValue": "refs/heads/main",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "49caeedd-3735-4a2f-8426-e2ef1d341110",
+      "name": "branch = main",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        740,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "1d2bbe77-2e62-4b59-ba15-74a09f5b489d",
+              "leftValue": "={{ $json.body.head_commit.modified }}",
+              "rightValue": "punchlines.csv",
+              "operator": {
+                "type": "array",
+                "operation": "contains",
+                "rightType": "any"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a2dcf423-e8f2-43ac-97d5-e766035f1c19",
+      "name": "modified = punchlines.csv",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        1040,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "-1002239289822",
+        "file": "={{ $json.download_url }}",
+        "additionalFields": {
+          "caption": "=Well done fucktard, the new punchlines have been approved! That makes {{ $json.count_row }} in all, and we're not stopping there. Can you find them?"
+        }
+      },
+      "id": "e246ae54-b866-4fc4-8cec-f9efb21b766a",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2700,
+        260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "nJm3RUkvbShmrHO0",
+          "name": "FucktardPunchlineBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "fucktardcto",
+          "mode": "list",
+          "cachedResultName": "fucktardcto",
+          "cachedResultUrl": "https://github.com/fucktardcto"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "punchlines",
+          "mode": "list",
+          "cachedResultName": "punchlines",
+          "cachedResultUrl": "https://github.com/fucktardcto/punchlines"
+        },
+        "filePath": "punchlines.csv",
+        "additionalParameters": {}
+      },
+      "id": "31720799-a201-42ce-ad45-342041cb378f",
+      "name": "GitHub1",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        20
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "vfNscJhqbHph9srD",
+          "name": "user/fcktardcto"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "headerRow": false
+        }
+      },
+      "id": "a7a6b30a-bcf5-4888-9955-bab6c55c44d7",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "field": "row"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4f71aafd-6341-4dff-9f50-9d455ee5f63a",
+      "name": "Summarize",
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "hvwBpP3YeRz8l1JQ",
+        "options": {}
+      },
+      "id": "337945af-73f3-4eae-a63b-409b2b69420a",
+      "name": "GetRandomImage",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "e78387fc-daf2-456d-8c13-304e4374c8e9",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        2420,
+        260
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Github Trigger": {
+      "webhookId": 509629708,
+      "webhookEvents": [
+        "push"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-10-26T19:20:29.507Z",
+      "updatedAt": "2024-10-26T19:20:29.507Z",
+      "id": "WcT2aqaWddduuKTQ",
+      "name": "fucktard"
+    },
+    {
+      "createdAt": "2024-10-27T00:43:25.900Z",
+      "updatedAt": "2024-10-27T00:43:25.900Z",
+      "id": "NooBX7Y6hAaWdyt6",
+      "name": "punchlines"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-27T02:02:55.706Z",
+  "versionId": "db3a4a67-5f4c-4095-b28a-bbec8a69151b"
+}
