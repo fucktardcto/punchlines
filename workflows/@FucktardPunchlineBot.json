@@ -1,0 +1,692 @@
+{
+  "active": true,
+  "connections": {
+    "GitHub": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File1": {
+      "main": [
+        [
+          {
+            "node": "append new punchline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "punchline": {
+      "main": [
+        [
+          {
+            "node": "text is not empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "text is not empty": {
+      "main": [
+        [
+          {
+            "node": "Read punchlines",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read punchlines": {
+      "main": [
+        [
+          {
+            "node": "Extract from File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Push new punchlines.csv": {
+      "main": [
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "append new punchline": {
+      "main": [
+        [
+          {
+            "node": "Push new punchlines.csv",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "context": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "punchline",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "GetRandomImage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetRandomImage": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-26T10:12:37.731Z",
+  "id": "mnS34xOS2j5yEieM",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "@FucktardPunchlineBot",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "fucktardcto",
+          "mode": "list",
+          "cachedResultName": "fucktardcto",
+          "cachedResultUrl": "https://github.com/fucktardcto"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "punchlines",
+          "mode": "list",
+          "cachedResultName": "punchlines",
+          "cachedResultUrl": "https://github.com/fucktardcto/punchlines"
+        },
+        "filePath": "punchlines.csv",
+        "additionalParameters": {
+          "reference": "main"
+        }
+      },
+      "id": "70f72138-ec4f-407d-ad38-39b33344df0f",
+      "name": "GitHub",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        500
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "vfNscJhqbHph9srD",
+          "name": "user/fcktardcto"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('context').item.json.chat_id }}",
+        "file": "={{ $json.download_url }}",
+        "additionalFields": {
+          "caption": "={{ $('Limit').item.json.row['0'] }}"
+        }
+      },
+      "id": "3c3ab837-7645-4c45-90e4-5afbd2ce107c",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2700,
+        500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "nJm3RUkvbShmrHO0",
+          "name": "FucktardPunchlineBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "headerRow": false
+        }
+      },
+      "id": "9870a3c6-0413-438c-a873-632daec933d6",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "id": "ebba97f6-1de2-4428-a447-976b0d687a5f",
+      "name": "Sort",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        500
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "c0a69218-12a3-4333-a2f4-7262b066e3b3",
+      "name": "Limit",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "6cec1246-3dee-481e-9e8b-e9ac58a0f006",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        120,
+        360
+      ],
+      "webhookId": "292bf4ca-d107-42e8-b058-3cf87562ddcd",
+      "credentials": {
+        "telegramApi": {
+          "id": "nJm3RUkvbShmrHO0",
+          "name": "FucktardPunchlineBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "id": "6b35b4ab-f513-49ec-957e-d61c380eb6ab",
+      "name": "Extract from File1",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2d131653-52c2-4a93-bf9f-2c20c5f306c4",
+              "name": "text",
+              "value": "={{ $json.message.text.match(/\\/punchline_add(@FucktardPunchlineBot)? (.+)/)[2].trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "08218eb9-e43b-4c9b-a264-444305c8b90f",
+      "name": "punchline",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        980,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('context').item.json.chat_id }}",
+        "text": "Are you retarded? You forgot to add the punchline after the command!",
+        "additionalFields": {
+          "appendAttribution": false,
+          "reply_to_message_id": "={{ $('Telegram Trigger').item.json.message.message_id }}"
+        }
+      },
+      "id": "16342fcf-b55a-45d3-8b68-41d2ddf186ff",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1480,
+        280
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "nJm3RUkvbShmrHO0",
+          "name": "FucktardPunchlineBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cff7d658-1233-401c-9150-99a6ca1e0ab4",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "0a79a2ff-d812-4ef3-9478-80f7ac872ad6",
+      "name": "text is not empty",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        1200,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "fucktardcto",
+          "mode": "list",
+          "cachedResultName": "fucktardcto",
+          "cachedResultUrl": "https://github.com/fucktardcto"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "punchlines",
+          "mode": "list",
+          "cachedResultName": "punchlines",
+          "cachedResultUrl": "https://github.com/fucktardcto/punchlines"
+        },
+        "filePath": "punchlines.csv",
+        "fileContent": "={{ $json.data }}",
+        "commitMessage": "=new punchline by {{ $('Telegram Trigger').first().json.message.from.first_name }}",
+        "additionalParameters": {
+          "branch": {
+            "branch": "incoming"
+          }
+        }
+      },
+      "id": "22ff129a-691a-4d2d-bd96-93c82d5027ac",
+      "name": "Push new punchlines.csv",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        100
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "vfNscJhqbHph9srD",
+          "name": "user/fcktardcto"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "fucktardcto",
+          "mode": "list",
+          "cachedResultName": "fucktardcto",
+          "cachedResultUrl": "https://github.com/fucktardcto"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "punchlines",
+          "mode": "list",
+          "cachedResultName": "punchlines",
+          "cachedResultUrl": "https://github.com/fucktardcto/punchlines"
+        },
+        "filePath": "punchlines.csv",
+        "additionalParameters": {
+          "reference": "incoming"
+        }
+      },
+      "id": "d15e9c8a-c9bf-483b-a33d-459ba6b29cea",
+      "name": "Read punchlines",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        100
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "vfNscJhqbHph9srD",
+          "name": "user/fcktardcto"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('context').item.json.chat_id }}",
+        "text": "You are a good fucktard ! Your punchline is now under review !",
+        "additionalFields": {
+          "appendAttribution": false,
+          "reply_to_message_id": "={{ $('Telegram Trigger').item.json.message.message_id }}"
+        }
+      },
+      "id": "7cc51830-d494-4c0d-b958-9ade613b5754",
+      "name": "Telegram2",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2680,
+        100
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "nJm3RUkvbShmrHO0",
+          "name": "FucktardPunchlineBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c563e787-a3c1-4572-9950-54302fa123a6",
+              "name": "data",
+              "value": "={{ $json.data }}\"{{ $('punchline').item.json.text.trim() }}\"\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5d6343ad-82b7-4b18-b589-4086a291ba01",
+      "name": "append new punchline",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2000,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0fa19f99-74aa-4178-bbb3-71ae7f7b7102",
+              "name": "chat_id",
+              "value": "-1002239289822",
+              "type": "string"
+            },
+            {
+              "id": "1a8c120c-a7ab-4c49-abd5-1407a2fd20d7",
+              "name": "message",
+              "value": "={{ $json.message }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8dab6d06-118b-48ae-8554-f2f8536514a3",
+      "name": "context",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        380,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "7bdf066f-4ddf-407c-94b2-1b9d8b65f5b1",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "/punchline_add",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "/punchline_add"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.text === \"/punchline\" || $json.message.text === \"/punchline@FucktardPunchlineBot\" }}",
+                    "rightValue": "=\"/punchline\" || \"/punchline@ FucktardPunchlineBot\"",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "/punchline"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "758fd7aa-8046-4835-ba1d-c82d633faa8b",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.1,
+      "position": [
+        620,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "hvwBpP3YeRz8l1JQ",
+        "options": {}
+      },
+      "id": "8adb7dea-f271-4095-9113-b20bc56cef87",
+      "name": "GetRandomImage",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2440,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e65a3081-49af-4b51-862b-0f2490dee501",
+              "name": "folder",
+              "value": "punch",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "68c2a928-1160-47be-82ee-624371a311d1",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2220,
+        500
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "callerPolicy": "workflowsFromSameOwner",
+    "saveDataSuccessExecution": "all",
+    "saveManualExecutions": false
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-10-26T19:20:29.507Z",
+      "updatedAt": "2024-10-26T19:20:29.507Z",
+      "id": "WcT2aqaWddduuKTQ",
+      "name": "fucktard"
+    },
+    {
+      "createdAt": "2024-10-27T00:43:25.900Z",
+      "updatedAt": "2024-10-27T00:43:25.900Z",
+      "id": "NooBX7Y6hAaWdyt6",
+      "name": "punchlines"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-27T02:04:43.044Z",
+  "versionId": "4e617b58-537e-4158-b099-794fd4ed0451"
+}
