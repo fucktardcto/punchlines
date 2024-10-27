@@ -1,0 +1,216 @@
+{
+  "active": false,
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-27T01:41:51.229Z",
+  "id": "hvwBpP3YeRz8l1JQ",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "GetRandomImage",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fed9bdc5-85dc-4535-9feb-da13e7927da4",
+              "name": "folder",
+              "value": "=images/{{ $json.folder || \"congrats\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b7d2269c-1d07-4789-9cfb-71a5b17007b3",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        840,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "value": "fucktardcto",
+          "mode": "list",
+          "cachedResultName": "fucktardcto",
+          "cachedResultUrl": "https://github.com/fucktardcto"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "punchlines",
+          "mode": "list",
+          "cachedResultName": "punchlines",
+          "cachedResultUrl": "https://github.com/fucktardcto/punchlines"
+        },
+        "filePath": "={{ $json.folder }}"
+      },
+      "id": "9279205b-3832-4245-8112-5eb6b79143ce",
+      "name": "GitHub",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        300
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "vfNscJhqbHph9srD",
+          "name": "user/fcktardcto"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "ecdf2827-25d5-4978-b150-f76187a7fff6",
+              "leftValue": "={{ [\"gif\", \"jpg\", \"jpeg\", \"png\"] }}",
+              "rightValue": "={{ $json.download_url.split(\".\").last() }}",
+              "operator": {
+                "type": "array",
+                "operation": "contains",
+                "rightType": "any"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "821c3e07-89b4-4653-81b0-1b19491fc4f5",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.1,
+      "position": [
+        1300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "id": "4522259d-90e0-485b-ad25-96060bfaca42",
+      "name": "Sort",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "88786653-92a4-40f4-9e6f-b9dd629d959e",
+      "name": "Limit",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "1303b5b8-9c46-49ef-95ac-55ac65c3ae07",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        600,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-10-26T19:20:29.507Z",
+      "updatedAt": "2024-10-26T19:20:29.507Z",
+      "id": "WcT2aqaWddduuKTQ",
+      "name": "fucktard"
+    },
+    {
+      "createdAt": "2024-10-27T00:43:25.900Z",
+      "updatedAt": "2024-10-27T00:43:25.900Z",
+      "id": "NooBX7Y6hAaWdyt6",
+      "name": "punchlines"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-27T01:49:06.229Z",
+  "versionId": "5f4c9957-3b9c-435f-813f-da2d768a82a4"
+}
